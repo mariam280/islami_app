@@ -124,37 +124,6 @@ void playRadio(RadioModel station, {bool isRepeating = false}) async {
   }
 }
 
-
-
- /* void playRadio(RadioModel station) async {
-    if (state is RadioLoaded) {
-      final loadedState = state as RadioLoaded;
-
-      // إذا كان نفس الملف يعمل، أوقفه فقط
-      if (loadedState.currentStation == station && loadedState.isPlaying) {
-        await audioPlayer.stop();
-        emit(RadioLoaded(stations: loadedState.stations, isPlaying: false));
-        return;
-      }
-
-      try {
-        // أوقف أي صوت يعمل حاليًا وتأكد من إعادة تعيينه
-        await audioPlayer.stop();
-        await audioPlayer.release(); // يمسح أي مصدر صوتي قديم قبل تشغيل الجديد
-
-        // تشغيل الملف الجديد
-        await audioPlayer.setSourceUrl(station.url);
-        await audioPlayer.resume();
-        emit(RadioLoaded(
-            stations: loadedState.stations,
-            currentStation: station,
-            isPlaying: true));
-      } catch (e) {
-        print(" حدث خطأ أثناء تشغيل الراديو: $e");
-      }
-    }
-  }*/
-
   /// **تبديل حالة المفضلة**
  void toggleFavorite(RadioModel station) {
   if (state is RadioLoaded) {
@@ -210,41 +179,4 @@ void playRadio(RadioModel station, {bool isRepeating = false}) async {
   }
 }
 
- /*void toggleRepeat(RadioModel station) {
-  if (state is RadioLoaded) {
-    final loadedState = state as RadioLoaded;
-    int index = loadedState.stations.indexWhere((s) => s.name == station.name);
-    if (index != -1) {
-      RadioModel updatedStation = loadedState.stations[index].copyWith(
-        isRepeating: !station.isRepeating,
-      );
-      radioBox.putAt(index, updatedStation);
-      List<RadioModel> updatedStations = List.from(loadedState.stations);
-      updatedStations[index] = updatedStation;
-
-      emit(RadioLoaded(
-        stations: updatedStations,
-        currentStation: loadedState.currentStation == station
-            ? updatedStation // حافظ على المحطة إذا كانت نفسها
-            : loadedState.currentStation,
-        isPlaying: loadedState.isPlaying, // حافظ على حالة التشغيل
-      ));
-    }
-  }
-}*/
-
 }
-
-/* void playRadio(RadioModel station) async {
-    if (state is RadioLoaded) {
-      final loadedState = state as RadioLoaded;
-      if (loadedState.currentStation == station && loadedState.isPlaying) {
-        await audioPlayer.stop();
-        emit(RadioLoaded(stations: loadedState.stations, isPlaying: false));
-      } else {
-        await audioPlayer.stop();
-        await audioPlayer.play(UrlSource(station.url));
-        emit(RadioLoaded(stations: loadedState.stations, currentStation: station, isPlaying: true));
-      }
-    }
-  }*/
